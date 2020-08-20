@@ -211,8 +211,7 @@ const cookies15 = {
 const visited = Array(24).fill(0);
 (async () => {
     const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--start-maximized']
+        args: ['--no-sandbox']
     });
     const page = await browser.newPage();
     // await page.setViewport({
