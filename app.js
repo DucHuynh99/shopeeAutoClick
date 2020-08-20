@@ -221,6 +221,7 @@ const visited = Array(24).fill(0);
     });
     await page.setCookie(cookies1, cookies2, cookies3, cookies4, cookies5, cookies6, cookies7, cookies8, cookies9, cookies10, cookies11, cookies12, cookies13, cookies14, cookies15);
     await page.goto("https://shopee.vn/");
+    console.log('Khởi động thành công!');
     while (true) {
         const now = new Date().getHours();
         console.log(now);
@@ -229,6 +230,7 @@ const visited = Array(24).fill(0);
                 if (visited[now] == 0 || visited[21] == 1) {
                     visited[now] = 1;
                     await page.goto('https://shopee.vn/shopee-coins');
+                    console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     await page.waitFor(TIME_TO_LOAD);
                     await page.click('button._1Puh5H');
                     visited.fill(0);
@@ -248,6 +250,7 @@ const visited = Array(24).fill(0);
                 if (visited[now] == 0) {
                     visited[now] = 1;
                     await page.goto('https://shopee.vn/pc_event/?url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F3dcc31fe943f8c43%3Fsmtt%3D1.330');
+                    console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
                     await page.waitFor(TIME_TO_LOAD);
                     const frame = page.frames()[1];
                     frame.click('div.handler');
