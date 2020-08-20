@@ -1,6 +1,13 @@
 const TIME_INTERVAL = 15 * 60 * 1000;
 const TIME_TO_LOAD = 20 * 1000;
 const puppeteer = require('puppeteer');
+const express = require('express');
+const app = express();
+
+app.get('/', function (req, res) {
+    res.send('Hello ');
+})
+
 const cookies1 = {
     "domain": ".shopee.vn",
     "expirationDate": 253402257600,
@@ -212,6 +219,8 @@ const visited = Array(24).fill(0);
 (async () => {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
+        // headless: true,
+        // args: ['--start-maximized']
     });
     const page = await browser.newPage();
     // await page.setViewport({
