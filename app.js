@@ -2,8 +2,8 @@ const TIME_INTERVAL = 15 * 60 * 1000;
 const TIME_TO_LOAD = 20 * 1000;
 const puppeteer = require('puppeteer');
 const express = require('express');
-const moment = require('moment-timezone')
 const app = express();
+const moment = require('moment-timezone')
 const port = process.env.PORT || 80
 
 
@@ -218,7 +218,7 @@ const cookies14 = {
 //     "value": "true",
 //     "id": 15
 // };
-
+app.listen(port, () => console.log(`app listening on port ${port}!`));
 const visited = Array(24).fill(0);
 (async () => {
     const browser = await puppeteer.launch({
@@ -226,17 +226,14 @@ const visited = Array(24).fill(0);
         args: ["--no-sandbox"]
     });
     const page = await browser.newPage();
-    // await page.setViewport({
-    //     width: 0,
-    //     height: 0,
-    // });
     await page.setCookie(cookies1, cookies2, cookies3, cookies4, cookies5, cookies6, cookies7, cookies8, cookies9, cookies10, cookies11, cookies12, cookies13, cookies14);
     await page.goto("https://shopee.vn/");
     await page.waitFor(5000);
     // await page.screenshot({ path: 'index.png' });
     console.log('Khởi động thành công!');
     while (true) {
-        const now = moment.tz('Asia/Ho_Chi_Minh').hour();
+        // const now = moment.tz('Asia/Ho_Chi_Minh').hour();
+        const now = new Date().getHours();
         console.log(now);
         switch (now) {
             case 0:
@@ -282,4 +279,3 @@ const visited = Array(24).fill(0);
     };
     await page.close();
 })();
-app.listen(port, () => console.log(`app listening on port ${port}!`))
