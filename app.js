@@ -233,8 +233,8 @@ const visited = Array(24).fill(0);
     // // await page.screenshot({ path: 'index.png' });
     // console.log('Khởi động thành công!');
     while (true) {
-        const now = new Date().getHours();
-        console.log(now);
+        const now = new Date();
+        setInterval(() => { console.log(now) }, 1000);
         // switch (now) {
         //     case 0:
         //         if (visited[now] == 0 || visited[21] == 1) {
