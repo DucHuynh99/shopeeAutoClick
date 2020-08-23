@@ -3,6 +3,7 @@ const TIME_TO_LOAD = 20 * 1000;
 const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3131
 
 app.get('/', function (req, res) {
     res.send('Hello ');
@@ -282,3 +283,4 @@ setInterval(() => {
     console.log(time)
     time++
 }, 1000)
+app.listen(port, () => console.log(`app listening on port ${port}!`))
