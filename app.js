@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const moment = require('moment-timezone')
 const app = express();
-const port = process.env.PORT || 3131
+const port = process.env.PORT || 80
 
 
 app.get('/', function (req, res) {
@@ -245,7 +245,7 @@ const visited = Array(24).fill(0);
                     await page.goto('https://shopee.vn/shopee-coins');
                     console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     await page.waitFor(TIME_TO_LOAD);
-                    await page.click('button._1Puh5H');
+                    // await page.click('button._1Puh5H');
                     visited.fill(0);
                     await page.screenshot({ path: 'index1.png' });
                     page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
