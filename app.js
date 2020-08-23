@@ -233,9 +233,9 @@ const visited = Array(24).fill(0);
     await page.setCookie(cookies1, cookies2, cookies3, cookies4, cookies5, cookies6, cookies7, cookies8, cookies9, cookies10, cookies11, cookies12, cookies13, cookies14);
     await page.goto("https://shopee.vn/");
     await page.waitFor(5000);
-    await page.screenshot({ path: 'index.png' });
+    // await page.screenshot({ path: 'index.png' });
     console.log('Khởi động thành công!');
-    while (false) {
+    while (true) {
         const now = moment.tz('Asia/Ho_Chi_Minh').hour();
         console.log(now);
         switch (now) {
