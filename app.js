@@ -253,7 +253,7 @@ var visited = Array(24).fill(0);
                     break;
                 }
             default:
-                console.log(`Chờ ${TIME_TO_LOAD} phút`);
+                console.log(`Chờ ${TIME_TO_LOAD} ms`);
                 await page.waitFor(TIME_INTERVAL);
                 break;
         }
