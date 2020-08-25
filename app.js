@@ -1,11 +1,12 @@
+// @ts-check
 const TIME_INTERVAL = 15 * 60 * 1000;
-const TIME_TO_LOAD = 20 * 1000;
-const puppeteer = require('puppeteer');
-const express = require('express');
-const app = express();
-const moment = require('moment-timezone')
-const port = process.env.PORT || 80;
+const TIME_TO_LOAD = 5 * 1000;
 
+const puppeteer = require('puppeteer');
+const moment = require('moment-timezone');
+const express = require('express');
+const port = process.env.PORT || 80;
+const app = express();
 
 app.get('/', function (req, res) {
     res.send('Hello ');
@@ -205,22 +206,9 @@ const cookies14 = {
     "value": "\"bYYGDfGoxmCxme1g6A6TIQ==\"",
     "id": 14
 };
-// const cookies15 = {
-//     "domain": "shopee.vn",
-//     "hostOnly": true,
-//     "httpOnly": false,
-//     "name": "welcomePkgShown",
-//     "path": "/",
-//     "sameSite": "unspecified",
-//     "secure": false,
-//     "session": true,
-//     "storeId": "0",
-//     "value": "true",
-//     "id": 15
-// };
 
+var visited = Array(24).fill(0);
 
-const visited = Array(24).fill(0);
 (async () => {
     const browser = await puppeteer.launch({
         headless: true,
@@ -229,55 +217,48 @@ const visited = Array(24).fill(0);
     const page = await browser.newPage();
     await page.setCookie(cookies1, cookies2, cookies3, cookies4, cookies5, cookies6, cookies7, cookies8, cookies9, cookies10, cookies11, cookies12, cookies13, cookies14);
     await page.goto("https://shopee.vn/");
-    await page.waitFor(5000);
-    // await page.screenshot({ path: 'index.png' });
+    await page.waitFor(TIME_TO_LOAD);
     console.log('Khởi động thành công!');
     while (true) {
         const now = moment.tz('Asia/Ho_Chi_Minh').hour();
-        // const now = new Date().getHours();
-        console.log(now);
+        console.log(`[Info] Bây giờ là ${now} giờ`);
         switch (now) {
             case 0:
                 if (visited[now] == 0 || visited[21] == 1) {
+                    console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     visited[now] = 1;
                     await page.goto('https://shopee.vn/shopee-coins');
-                    console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     await page.waitFor(TIME_TO_LOAD);
                     await page.click('button._1Puh5H');
                     visited.fill(0);
-                    await page.screenshot({ path: 'index1.png' });
-                    page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
+                    await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                     break;
                 } else {
-                    page.waitFor(TIME_INTERVAL);
+                    await page.waitFor(TIME_INTERVAL);
                     break;
                 }
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 15:
-            case 18:
-            case 21:
+            case 9: case 10: case 11: case 12: case 15: case 18: case 21:
                 if (visited[now] == 0) {
+                    console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
                     visited[now] = 1;
                     await page.goto('https://shopee.vn/pc_event/?url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F3dcc31fe943f8c43%3Fsmtt%3D1.330');
-                    console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
                     await page.waitFor(TIME_TO_LOAD);
                     const frame = page.frames()[1];
-                    frame.click('div.handler');
-                    page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
+                    await frame.click('div.handler');
+                    await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                     break;
                 }
                 else {
-                    page.waitFor(TIME_INTERVAL);
+                    await page.waitFor(TIME_INTERVAL);
                     break;
                 }
             default:
+                console.log('default');
                 await page.waitFor(TIME_INTERVAL);
                 break;
         }
     };
     await page.close();
 })();
+
 app.listen(port, () => console.log(`app listening on port ${port}!`));
