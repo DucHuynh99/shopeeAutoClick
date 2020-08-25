@@ -1,6 +1,6 @@
 // @ts-check
 const TIME_INTERVAL = 15 * 60 * 1000;
-const TIME_TO_LOAD = 5 * 1000;
+const TIME_TO_LOAD = 20 * 1000;
 
 const puppeteer = require('puppeteer');
 const moment = require('moment-timezone');
@@ -9,7 +9,7 @@ const port = process.env.PORT || 80;
 const app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello ');
+    res.send('Hello');
 });
 
 const cookies1 = {
@@ -253,7 +253,7 @@ var visited = Array(24).fill(0);
                     break;
                 }
             default:
-                console.log('default');
+                console.log(`Chờ ${TIME_TO_LOAD} phút`);
                 await page.waitFor(TIME_INTERVAL);
                 break;
         }
