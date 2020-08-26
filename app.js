@@ -226,21 +226,20 @@ var visited = Array(24).fill(0);
             case 0:
                 if (visited[now] == 0 || visited[21] == 1) {
                     console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
-                    visited[now] = 1;
+                    visited.fill(0);
                     await page.goto('https://shopee.vn/shopee-coins');
                     await page.waitFor(TIME_TO_LOAD);
                     await page.click('button._1Puh5H');
-                    visited.fill(0);
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                     break;
                 } else {
+                    console.log(`Lúc ${now} giờ: Chờ ${TIME_INTERVAL / 60 / 1000} phút`);
                     await page.waitFor(TIME_INTERVAL);
                     break;
                 }
             case 9: case 10: case 11: case 12: case 15: case 18: case 21:
                 if (visited[now] == 0) {
                     console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
-                    visited[now] = 1;
                     await page.goto('https://shopee.vn/pc_event/?url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F3dcc31fe943f8c43%3Fsmtt%3D1.330');
                     await page.waitFor(TIME_TO_LOAD);
                     const frame = page.frames()[1];
@@ -249,16 +248,16 @@ var visited = Array(24).fill(0);
                     break;
                 }
                 else {
+                    console.log(`Lúc ${now} giờ: Chờ ${TIME_INTERVAL / 60 / 1000} phút`);
                     await page.waitFor(TIME_INTERVAL);
                     break;
                 }
             default:
-                console.log(`Chờ ${TIME_TO_LOAD} ms`);
+                console.log(`Lúc ${now} giờ: Chờ ${TIME_INTERVAL / 60 / 1000} phút`);
                 await page.waitFor(TIME_INTERVAL);
-                break;
         }
+        visited[now] = 1;
     };
-    await page.close();
 })();
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
