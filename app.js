@@ -221,7 +221,6 @@ var visited = Array(24).fill(0);
     console.log('Khởi động thành công!');
     while (true) {
         const now = moment.tz('Asia/Ho_Chi_Minh').hour();
-        console.log(`[Info] Bây giờ là ${now} giờ`);
         switch (now) {
             case 0:
                 if (visited[now] == 0 || visited[21] == 1) {
