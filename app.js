@@ -52,7 +52,11 @@ var visited = Array(24).fill(0);
                     visited[0] = 1;
                     await page.goto('https://shopee.vn/shopee-coins');
                     await page.waitFor(TIME_TO_LOAD);
-                    await page.click('button._1Puh5H');
+                    try {
+                        await page.click('button._1Puh5H');
+                    } catch (error) {
+                        console.log('Bạn đã đăng nhập vào ngày hôm nay!');
+                    }
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                 } else {
                     console.log(`Lúc ${now} giờ: Chờ ${TIME_INTERVAL / 60 / 1000} phút`);
