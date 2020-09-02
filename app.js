@@ -23,8 +23,8 @@ var visited = Array(24).fill(0);
     });
     const page = await browser.newPage();
     await page.setCookie(...cookies.array);
-    // await page.goto("https://shopee.vn/");
-    // await page.waitFor(TIME_TO_LOAD);
+    await page.goto("https://shopee.vn/");
+    await page.waitFor(TIME_TO_LOAD);
     console.log('Khởi động thành công!');
     while (true) {
         const now = moment.tz('Asia/Ho_Chi_Minh').hour();
@@ -32,7 +32,7 @@ var visited = Array(24).fill(0);
             case 9: case 10: case 11: case 12: case 15: case 18: case 21:
                 if (visited[now] == 0) {
                     console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
-                    visited[now] = 0;
+                    visited[now] = 1;
                     try {
                         await page.goto('https://shopee.vn/pc_event/?smtt=1.330&url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F48cd355f2471e94e%3Fsmtt%3D1.330');
                     } catch (error) {
