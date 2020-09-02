@@ -33,10 +33,17 @@ var visited = Array(24).fill(0);
                 if (visited[now] == 0) {
                     console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
                     visited[now] = 0;
-                    await page.goto('https://shopee.vn/pc_event/?smtt=1.330&url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F48cd355f2471e94e%3Fsmtt%3D1.330');
+                    try {
+                        await page.goto('https://shopee.vn/pc_event/?smtt=1.330&url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F48cd355f2471e94e%3Fsmtt%3D1.330');
+                    } catch (error) {
+                        console.log('URL Quà tặng Shopee đã thay đổi, vui lòng cập nhật!');
+                    }
                     await page.waitFor(TIME_TO_LOAD);
-                    const frame = page.frames()[1];
-                    await frame.click('div.handler');
+                    try {
+                        await page.frames()[1].click('div.handler');
+                    } catch (error) {
+                        console.log('Bạn đã nhận quà vào khung giờ này rồi!');
+                    }
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                     break;
                 }
