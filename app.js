@@ -48,9 +48,10 @@ app.get('/', function (req, res) { res.send('Hello'); });
                 }
                 break;
             default:
-                if (visited[0] == 0 || visited[21] == 1) {
-                    console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
+                if (now == 0 && visited[21] == 1)
                     visited.fill(0);
+                if (visited[0] == 0) {
+                    console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     visited[0] = 1;
                     await page.goto(coinUrl);
                     await page.waitFor(TIME_TO_LOAD);
