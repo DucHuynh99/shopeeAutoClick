@@ -2,7 +2,12 @@
 const TIME_INTERVAL = 15 * 60 * 1000;
 const TIME_TO_LOAD = 20 * 1000;
 
-const cookies = require('./cookies');
+const {
+    cookies,
+    homeUrl,
+    coinUrl,
+    luckyUrl
+} = require('./shopeeData');
 
 const puppeteer = require('puppeteer');
 const moment = require('moment-timezone');
@@ -22,8 +27,8 @@ var visited = Array(24).fill(0);
         args: ["--no-sandbox"]
     });
     const page = await browser.newPage();
-    await page.setCookie(...cookies.array);
-    await page.goto("https://shopee.vn/");
+    await page.setCookie(...cookies);
+    await page.goto(homeUrl);
     await page.waitFor(TIME_TO_LOAD);
     console.log('Khởi động thành công!');
     while (true) {
@@ -34,7 +39,7 @@ var visited = Array(24).fill(0);
                     console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
                     visited[now] = 1;
                     try {
-                        await page.goto('https://shopee.vn/pc_event/?smtt=1.330&url=https%3A%2F%2Fluckydraw.shopee.vn%2Fevent%2F48cd355f2471e94e%3Fsmtt%3D1.330');
+                        await page.goto(luckyUrl);
                     } catch (error) {
                         console.log('URL Quà tặng Shopee đã thay đổi, vui lòng cập nhật!');
                     }
@@ -45,19 +50,18 @@ var visited = Array(24).fill(0);
                         console.log('Bạn đã nhận quà vào khung giờ này rồi!');
                     }
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
-                    break;
                 }
                 else {
                     console.log(`Lúc ${now} giờ: Chờ ${TIME_INTERVAL / 60 / 1000} phút`);
                     await page.waitFor(TIME_INTERVAL);
-                    break;
                 }
+                break;
             default:
                 if (visited[0] == 0 || visited[21] == 1) {
                     console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
                     visited.fill(0);
                     visited[0] = 1;
-                    await page.goto('https://shopee.vn/shopee-coins');
+                    await page.goto(coinUrl);
                     await page.waitFor(TIME_TO_LOAD);
                     try {
                         await page.click('button._1Puh5H');

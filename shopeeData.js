@@ -1,4 +1,7 @@
-exports.array = [
+const homeUrl = 'https://shopee.vn/';
+const coinUrl = 'https://shopee.vn/shopee-coins';
+const luckyUrl = 'https://shopee.vn/quatangshopee';
+const cookies = [
     {
         "domain": ".shopee.vn",
         "expirationDate": 253402257600,
@@ -207,3 +210,10 @@ exports.array = [
         "id": 15
     }
 ];
+
+module.exports = {
+    cookies,
+    homeUrl,
+    coinUrl,
+    luckyUrl
+}
