@@ -2,26 +2,17 @@
 const TIME_INTERVAL = 15 * 60 * 1000;
 const TIME_TO_LOAD = 20 * 1000;
 
-const {
-    cookies,
-    homeUrl,
-    coinUrl,
-    luckyUrl
-} = require('./shopeeData');
-
+const { cookies, homeUrl, coinUrl, luckyUrl } = require('./shopeeData');
 const puppeteer = require('puppeteer');
 const moment = require('moment-timezone');
 const express = require('express');
 const port = process.env.PORT || 80;
 const app = express();
 
-app.get('/', function (req, res) {
-    res.send('Hello');
-});
-
-var visited = Array(24).fill(0);
+app.get('/', function (req, res) { res.send('Hello'); });
 
 (async () => {
+    var visited = Array(24).fill(0);
     const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox"]
@@ -41,13 +32,13 @@ var visited = Array(24).fill(0);
                     try {
                         await page.goto(luckyUrl);
                     } catch (error) {
-                        console.log('URL Quà tặng Shopee đã thay đổi, vui lòng cập nhật!');
+                        console.log('URL không hợp lệ!');
                     }
                     await page.waitFor(TIME_TO_LOAD);
                     try {
                         await page.frames()[1].click('div.handler');
                     } catch (error) {
-                        console.log('Bạn đã nhận quà vào khung giờ này rồi!');
+                        console.log('Bạn đã nhận quà rồi!');
                     }
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                 }
@@ -66,7 +57,7 @@ var visited = Array(24).fill(0);
                     try {
                         await page.click('button._1Puh5H');
                     } catch (error) {
-                        console.log('Bạn đã đăng nhập vào ngày hôm nay!');
+                        console.log('Bạn đã nhận xu rồi!');
                     }
                     await page.waitFor(TIME_INTERVAL - TIME_TO_LOAD);
                 } else {
