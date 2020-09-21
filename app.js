@@ -1,6 +1,6 @@
 // @ts-check
 const TIME_INTERVAL = 15 * 60 * 1000;
-const TIME_TO_LOAD = 20 * 1000;
+const TIME_TO_LOAD = 60 * 1000;
 
 const { cookies, homeUrl, coinUrl, luckyUrl } = require('./shopeeData');
 const puppeteer = require('puppeteer');
