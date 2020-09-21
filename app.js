@@ -36,7 +36,7 @@ app.get('/', function (req, res) { res.send('Hello'); });
                     }
                     await page.waitFor(TIME_TO_LOAD);
                     try {
-                        await page.frames()[1].click('div.handler');
+                        await page.frames()[1].click('#clickArea');
                     } catch (error) {
                         console.log('Bạn đã nhận quà rồi!');
                     }
