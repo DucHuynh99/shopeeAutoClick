@@ -3,6 +3,7 @@ const TIME_TO_LOAD = 60 * 1000;
 
 const { cookies, homeUrl, coinUrl, luckyUrl } = require('./shopeeData');
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 const moment = require('moment-timezone');
 
 (async() => {
@@ -21,7 +22,8 @@ const moment = require('moment-timezone');
             await page.waitFor(TIME_TO_LOAD);
             await page.click('button._1Puh5H');
             await page.waitFor(2000);
-            await page.screenshot({ path: './public/images/screenshot.png', fullPage: true });
+            const buff = await page.screenshot({ fullPage: true });
+            fs.writeFileSync('./public/images/screenshot.png', buff.toString('binary'), 'binary');
             break;
         case 9:
         case 10:
@@ -35,7 +37,8 @@ const moment = require('moment-timezone');
             await page.waitFor(TIME_TO_LOAD);
             await page.frames()[1].click('#clickArea');
             await page.waitFor(2000);
-            await page.screenshot({ path: './public/images/screenshot.png', fullPage: true });
+            const buff = await page.screenshot({ fullPage: true });
+            fs.writeFileSync('./public/images/screenshot.png', buff.toString('binary'), 'binary');
             break;
     }
     await browser.close();
