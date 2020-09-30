@@ -1,5 +1,5 @@
 // @ts-check
-const TIME_TO_LOAD = 60 * 1000;
+const TIME_TO_LOAD = 10 * 1000;
 
 const { cookies, homeUrl, coinUrl, luckyUrl } = require('./shopeeData');
 const puppeteer = require('puppeteer');
@@ -15,7 +15,7 @@ const moment = require('moment-timezone');
     await page.setCookie(...cookies);
     await page.setViewport({ width: 1440, height: 900 });
     const now = moment.tz('Asia/Ho_Chi_Minh').hour();
-    switch (now) {
+    switch (21) {
         case 0:
             console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
             await page.goto(coinUrl);
