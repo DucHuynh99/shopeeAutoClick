@@ -1,12 +1,14 @@
 // @ts-check
-const TIME_TO_LOAD = 10 * 1000;
+const TIME_TO_LOAD = 120 * 1000;
 
+const imageServices = require('./public/js/image-services');
+const dataServies = require('./public/js/data-services');
 const { cookies, homeUrl, coinUrl, luckyUrl } = require('./shopeeData');
+
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const moment = require('moment-timezone');
 
-(async() => {
+(async () => {
     const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox", "--start-maximized"]
@@ -15,31 +17,34 @@ const moment = require('moment-timezone');
     await page.setCookie(...cookies);
     await page.setViewport({ width: 1440, height: 900 });
     const now = moment.tz('Asia/Ho_Chi_Minh').hour();
-    switch (21) {
+    switch (now) {
         case 0:
             console.log(`Lúc ${now} giờ: Săn xu mỗi ngày!`);
             await page.goto(coinUrl);
             await page.waitFor(TIME_TO_LOAD);
             await page.click('button._1Puh5H');
             await page.waitFor(2000);
-            const buff1 = await page.screenshot({ fullPage: true });
-            fs.writeFileSync('./public/images/screenshot.png', buff1.toString('binary'), 'binary');
+            const image1 = await page.screenshot({ fullPage: true });
+            await saveScreenshot(image1);
             break;
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 15:
-        case 18:
-        case 21:
+        case 9: case 10: case 11: case 12: case 15: case 18: case 21:
             console.log(`Lúc ${now} giờ: Quà tặng Shopee!`);
             await page.goto(luckyUrl);
             await page.waitFor(TIME_TO_LOAD);
             await page.frames()[1].click('#clickArea');
             await page.waitFor(2000);
-            const buff2 = await page.screenshot({ fullPage: true });
-            fs.writeFileSync('./public/images/screenshot.png', buff2.toString('binary'), 'binary');
+            const image2 = await page.screenshot({ fullPage: true });
+            await saveScreenshot(image2);
             break;
     }
     await browser.close();
 })();
+
+const saveScreenshot = async (image) => {
+    try {
+        const url = await imageServices.uploadImage(image);
+        return await dataServies.saveUrl(url);
+    } catch (error) {
+        console.log(error);
+    }
+}

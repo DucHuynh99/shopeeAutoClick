@@ -1,15 +1,20 @@
 // @ts-check
 const port = process.env.PORT || 8080;
-const path = require('path');
+
+const dataServices = require('./public/js/data-services');
+
+const handlebars = require('express-handlebars');
 const express = require('express');
 const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
+app.engine('handlebars', handlebars());
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
 
-app.get('/', function(req, res) {
+app.get('/', async (req, res) => {
     res
         .status(200)
-        .sendFile(path.join(__dirname, 'public', 'index.html'));
+        .render('home', { screenshotUrl: await dataServices.getUrl() });
 });
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
