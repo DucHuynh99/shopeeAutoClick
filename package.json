@@ -1,13 +1,13 @@
 {
   "name": "shopeeautoclick",
   "version": "1.0.0",
-  "description": "",
+  "description": "Very simple Shopee auto click tool",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Huỳnh Hữu Đức",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.20.0",
