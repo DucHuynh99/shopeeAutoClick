@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./public/js/background-service.js"
   },
   "author": "Huỳnh Hữu Đức",
   "license": "ISC",

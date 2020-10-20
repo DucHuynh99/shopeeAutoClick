@@ -3,6 +3,20 @@ const luckyUrl = 'https://shopee.vn/quatangshopee';
 const cookies = [
     {
         "domain": ".shopee.vn",
+        "expirationDate": 1611013517,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "_gcl_au",
+        "path": "/",
+        "sameSite": "unspecified",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "1.1.132660091.1603237518",
+        "id": 1
+    },
+    {
+        "domain": ".shopee.vn",
         "expirationDate": 253402257600,
         "hostOnly": false,
         "httpOnly": false,
@@ -13,25 +27,11 @@ const cookies = [
         "session": false,
         "storeId": "0",
         "value": "google",
-        "id": 1
-    },
-    {
-        "domain": ".shopee.vn",
-        "expirationDate": 1602598056.80022,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "REC_MD_22_1000944",
-        "path": "/",
-        "sameSite": "unspecified",
-        "secure": false,
-        "session": false,
-        "storeId": "0",
-        "value": "1602597935_0_10_0_10",
         "id": 2
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 1602598056.612744,
+        "expirationDate": 1603237839.909904,
         "hostOnly": false,
         "httpOnly": false,
         "name": "REC_MD_41_1000121",
@@ -40,7 +40,7 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "1602598055_0_50_0_43",
+        "value": "1603237838_0_50_0_45",
         "id": 3
     },
     {
@@ -59,7 +59,7 @@ const cookies = [
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 2233317758.417747,
+        "expirationDate": 2233957543.363604,
         "hostOnly": false,
         "httpOnly": false,
         "name": "SPC_EC",
@@ -68,7 +68,7 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "MeYzZ2CuNbKlpDSXTrBywQ5yiwG6QudSntIbzh34WXOC+FkW0WL/yFbY/oYhzRBrBWeQ2xC5eZqNNiz0eea1EXUAcfM9IZ2OZ/g/esdM/DL6Pvn5iB/nN4OTaKs6D5vwBS8+7snX0w7rmp939hfwTQ==",
+        "value": "99Q2Fz7gWuzzGnscot0nX+BovTmz+EZefgJMMsDrLrPSiw3P9lQLS0VrbARATK/XxTKjWPceAw5pT3PtHs5p9Pr97zn6mEGhm3WicoBocfoKrrASfyOXXIWIHkAIyZYqm6ra29h+3F13HpLZuendyg==",
         "id": 5
     },
     {
@@ -87,7 +87,7 @@ const cookies = [
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 2233317759.222764,
+        "expirationDate": 2233957544.857186,
         "hostOnly": false,
         "httpOnly": false,
         "name": "SPC_R_T_ID",
@@ -96,12 +96,12 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "\"07xoma6rww1kVzuIRtFVUAuF1jD+yqXy/rNtFg4x0RFHYYf+BMZnNCZLljqkBabscXrNshHkG++iB7gqNYUzX1ASzQiDSF7BrKhsH5LxLok=\"",
+        "value": "\"zh6qcLr4sirrIetxmqzAF6uMsRj/WccD1zLQTf5AV1CjgcnNoMlizbFXWBbWZubOCq9Kr9dueUxYFI8B9jHezK/ge8VbW8fvo2CAoTjbToM=\"",
         "id": 7
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 2233317759.222871,
+        "expirationDate": 2233957544.857743,
         "hostOnly": false,
         "httpOnly": false,
         "name": "SPC_R_T_IV",
@@ -110,12 +110,12 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "\"OrsPsdB2Mdjao4Pna0pwLA==\"",
+        "value": "\"bpP0wWbyMJ/eXfyc4l94vw==\"",
         "id": 8
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 1602684159.22293,
+        "expirationDate": 1603323944.857846,
         "hostOnly": false,
         "httpOnly": true,
         "name": "SPC_SI",
@@ -124,12 +124,12 @@ const cookies = [
         "secure": true,
         "session": false,
         "storeId": "0",
-        "value": "mall.xLNNNtUTeiLg30Tn0bbfBeO3FMTbVHq1",
+        "value": "mall.hobV46VPBIHOpcMNwaOXKh0wKEjBBrT4",
         "id": 9
     },
     {
         "domain": ".shopee.vn",
-        "expirationDate": 2233317752.884506,
+        "expirationDate": 2233957534.830749,
         "hostOnly": false,
         "httpOnly": false,
         "name": "SPC_U",
@@ -151,7 +151,7 @@ const cookies = [
         "secure": false,
         "session": true,
         "storeId": "0",
-        "value": "ldb6jtMOuafKd3Z4H8MMN7NGQQ0K9Dwd",
+        "value": "TFPm0FyQhIuXGiXsRZcu3el6wsNarLSY",
         "id": 11
     },
     {
@@ -183,7 +183,7 @@ const cookies = [
     },
     {
         "domain": "shopee.vn",
-        "expirationDate": 2233317759.222901,
+        "expirationDate": 2233957544.857794,
         "hostOnly": true,
         "httpOnly": false,
         "name": "SPC_T_ID",
@@ -192,12 +192,12 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "\"07xoma6rww1kVzuIRtFVUAuF1jD+yqXy/rNtFg4x0RFHYYf+BMZnNCZLljqkBabscXrNshHkG++iB7gqNYUzX1ASzQiDSF7BrKhsH5LxLok=\"",
+        "value": "\"zh6qcLr4sirrIetxmqzAF6uMsRj/WccD1zLQTf5AV1CjgcnNoMlizbFXWBbWZubOCq9Kr9dueUxYFI8B9jHezK/ge8VbW8fvo2CAoTjbToM=\"",
         "id": 14
     },
     {
         "domain": "shopee.vn",
-        "expirationDate": 2233317759.222837,
+        "expirationDate": 2233957544.857685,
         "hostOnly": true,
         "httpOnly": false,
         "name": "SPC_T_IV",
@@ -206,7 +206,7 @@ const cookies = [
         "secure": false,
         "session": false,
         "storeId": "0",
-        "value": "\"OrsPsdB2Mdjao4Pna0pwLA==\"",
+        "value": "\"bpP0wWbyMJ/eXfyc4l94vw==\"",
         "id": 15
     },
     {
