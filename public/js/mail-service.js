@@ -3,12 +3,16 @@ const nodemailer = require('nodemailer');
 const sendWarningEmail = async () => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 587,
-        ignoreTLS: false,
-        secure: false,
+        port: 465,
+        secure: true,
         auth: {
+            type: 'OAuth2',
             user: 'shopeeautotool@gmail.com',
-            pass: 'huynhhuuduc1999'
+            clientId: '211046368753-5js556qhhvc9va9ldc3j7rfa6uj4n3do.apps.googleusercontent.com',
+            clientSecret: 'FlIMqyO1ZEEvE5Ut94CvxhSV',
+            refreshToken: '1//04Z0Z2Pdhbo-lCgYIARAAGAQSNwF-L9IrrjYyRUpwUKdqC-_dISYJXZOgFDRLDY2gSODSahXEN-xyWIgyOXbfYQcp33jDaJCxKjo',
+            accessToken: 'ya29.a0AfH6SMBbdmxnUUpWRlWYiW0isjUZ8GeNntKjA71R6OvzmgsMxcOWL411GyTSmi9u2c7I6IaKWabfHtiF1WnpNIJqwhgMDMac1sloU_sds-apGtWaJEjbfbfzHTJanm1qp4FDr2XkCdDj1nwejjJY0Mi13UsC-3f66BYsUm-m2YE',
+            expires: 3599
         }
     });
 
