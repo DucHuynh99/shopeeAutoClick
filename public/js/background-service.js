@@ -2,7 +2,8 @@
 const imageServices = require('./image-service');
 const dataServies = require('./data-service');
 const mailServices = require('./mail-service');
-const { cookies, coinUrl, luckyUrl } = require('../../shopee-data');
+const accountServices = require('./account-service');
+const { coinUrl, luckyUrl } = require('../../shopee-data');
 
 const puppeteer = require('puppeteer');
 const moment = require('moment-timezone');
@@ -13,6 +14,7 @@ const moment = require('moment-timezone');
         args: ["--no-sandbox", "--start-maximized"]
     });
     const page = await browser.newPage();
+    const cookies = await dataServies.getShopeeCookies();
     await page.setCookie(...cookies);
     await page.setViewport({ width: 1440, height: 900 });
     await page.setDefaultNavigationTimeout(300000);
@@ -23,9 +25,7 @@ const moment = require('moment-timezone');
             await page.goto(coinUrl);
             await page.waitFor(180000);
             if ((await page.$$('div.shopee-avatar')).length == 0) {
-                console.log('Chưa đăng nhập. Gửi email thông báo...');
-                await mailServices.sendWarningEmail();
-                break;
+                await reloginShopee(browser, page);
             }
             await page.click('button._1Puh5H');
             await page.waitFor(5000);
@@ -36,9 +36,7 @@ const moment = require('moment-timezone');
             console.log(`[${now} giờ] Quà tặng Shopee`);
             await page.goto(luckyUrl, { waitUntil: 'networkidle0' });
             if ((await page.$$('div.shopee-avatar')).length == 0) {
-                console.log('Chưa đăng nhập. Gửi email thông báo...');
-                await mailServices.sendWarningEmail();
-                break;
+                await reloginShopee(browser, page);
             }
             await page.frames()[1].click('#clickArea');
             await page.waitFor(5000);
@@ -58,5 +56,19 @@ const saveScreenshot = async (image) => {
         return await dataServies.saveUrl(url);
     } catch (error) {
         console.log(error);
+    }
+}
+
+const reloginShopee = async (browser, page) => {
+    try {
+        console.log('Chưa đăng nhập. Gửi email thông báo...');
+        await mailServices.sendWarningEmail();
+        await accountServices.login(browser);
+        await page.deleteCookie();
+        const newCookies = await dataServies.getShopeeCookies();
+        await page.setCookie(...newCookies);
+        await page.reload({ waitUntil: 'networkidle0' });
+    } catch (error) {
+        console.log("[ERROR in relogin]", error);
     }
 }
