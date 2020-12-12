@@ -17,7 +17,7 @@ const moment = require('moment-timezone');
     const cookies = await dataServies.getShopeeCookies();
     await page.setCookie(...cookies);
     await page.setViewport({ width: 1440, height: 900 });
-    await page.setDefaultNavigationTimeout(300000);
+    await page.setDefaultNavigationTimeout(0);
     const now = moment.tz('Asia/Ho_Chi_Minh');
     const dateNow = now.format(now.format(`DD/MM/YYYY HH:mm:ss`));
     switch (now.hour()) {
