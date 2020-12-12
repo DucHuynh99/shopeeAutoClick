@@ -14,7 +14,9 @@ const login = async (browser) => {
         await page.click("button._35rr5y._32qX4k._1ShBrl._3z3XZ9._2iOIqx._2h_2_Y");
         await page.waitFor(60000);
         await page.goto("https://shopee.vn/", { waitUntil: 'networkidle0' });
-        await dataServices.saveShopeeCookies(await page.cookies());
+        const newCookies = await page.cookies();
+        console.log(`New cookies: `, newCookies);
+        await dataServices.saveShopeeCookies(newCookies);
         await page.close();
     } catch (error) {
         console.log("[ERROR In Account Services]", error);

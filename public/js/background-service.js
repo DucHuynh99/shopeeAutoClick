@@ -10,7 +10,7 @@ const moment = require('moment-timezone');
 
 (async () => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: ["--no-sandbox", "--start-maximized"]
     });
     const page = await browser.newPage();
@@ -18,10 +18,11 @@ const moment = require('moment-timezone');
     await page.setCookie(...cookies);
     await page.setViewport({ width: 1440, height: 900 });
     await page.setDefaultNavigationTimeout(300000);
-    const now = moment.tz('Asia/Ho_Chi_Minh').hour();
-    switch (now) {
+    const now = moment.tz('Asia/Ho_Chi_Minh');
+    const dateNow = now.format(now.format(`DD/MM/YYYY HH:mm:ss`));
+    switch (now.hour()) {
         case 0:
-            console.log(`[${now} giờ] Săn xu mỗi ngày`);
+            console.log(`[${dateNow}] Săn xu mỗi ngày`);
             await page.goto(coinUrl);
             await page.waitFor(180000);
             if ((await page.$$('div.shopee-avatar')).length == 0) {
@@ -33,7 +34,7 @@ const moment = require('moment-timezone');
             await saveScreenshot(image1);
             break;
         case 9: case 10: case 11: case 12: case 15: case 18: case 21:
-            console.log(`[${now} giờ] Quà tặng Shopee`);
+            console.log(`[${dateNow}] Quà tặng Shopee`);
             await page.goto(luckyUrl, { waitUntil: 'networkidle0' });
             if ((await page.$$('div.shopee-avatar')).length == 0) {
                 await reloginShopee(browser, page);
@@ -44,7 +45,7 @@ const moment = require('moment-timezone');
             await saveScreenshot(image2);
             break;
         default:
-            console.log(`[${now} giờ] Chờ`);
+            console.log(`[${dateNow}] Chờ`);
             break;
     }
     await browser.close();

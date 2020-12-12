@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const moment = require('moment-timezone');
 
 const saveUrl = async (url) => {
     try {
@@ -19,28 +20,9 @@ const getUrl = async () => {
     }
 }
 
-const saveLoginCookies = async (cookies) => {
-    try {
-        const data = { loginCookies: cookies };
-        const res = await axios.put('https://jsonblob.com/api/jsonBlob/20a332f7-3697-11eb-afd1-dbdb91813467', data, { headers: { 'Content-Type': 'application/json' } });
-        return res.status;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-const getLoginCookies = async () => {
-    try {
-        const res = await axios.get('https://jsonblob.com/api/jsonBlob/20a332f7-3697-11eb-afd1-dbdb91813467');
-        return res.data.loginCookies;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 const saveShopeeCookies = async (cookies) => {
     try {
-        const data = { Cookies: cookies };
+        const data = { Cookies: cookies, ModifiedDate: moment.tz(`Asia/Ho_Chi_Minh`).format(`DD/MM/YYYY HH:mm:ss`) };
         const res = await axios.put('https://jsonblob.com/api/jsonBlob/a110ac55-369a-11eb-afd1-ad79cfbae68a', data, { headers: { 'Content-Type': 'application/json' } });
         return res.status;
     } catch (error) {
@@ -51,6 +33,7 @@ const saveShopeeCookies = async (cookies) => {
 const getShopeeCookies = async () => {
     try {
         const res = await axios.get('https://jsonblob.com/api/jsonBlob/a110ac55-369a-11eb-afd1-ad79cfbae68a');
+        console.log(`Cookies date: `, res.data.ModifiedDate);
         return res.data.Cookies;
     } catch (error) {
         console.log(error);
@@ -60,8 +43,6 @@ const getShopeeCookies = async () => {
 module.exports = {
     saveUrl,
     getUrl,
-    saveLoginCookies,
-    getLoginCookies,
     saveShopeeCookies,
     getShopeeCookies
 }
