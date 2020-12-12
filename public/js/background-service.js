@@ -10,7 +10,7 @@ const moment = require('moment-timezone');
 
 (async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: ["--no-sandbox", "--start-maximized"]
     });
     const page = await browser.newPage();
