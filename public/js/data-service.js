@@ -22,7 +22,8 @@ const getUrl = async () => {
 
 const saveShopeeCookies = async (cookies) => {
     try {
-        const data = { Cookies: cookies, ModifiedDate: moment.tz(`Asia/Ho_Chi_Minh`).format(`DD/MM/YYYY HH:mm:ss`) };
+        const modifiedDate = moment.tz(`Asia/Ho_Chi_Minh`).format(`DD/MM/YYYY HH:mm:ss`);
+        const data = { "Cookies": cookies, "ModifiedDate": modifiedDate };
         const res = await axios.put('https://jsonblob.com/api/jsonBlob/a110ac55-369a-11eb-afd1-ad79cfbae68a', data, { headers: { 'Content-Type': 'application/json' } });
         return res.status;
     } catch (error) {
