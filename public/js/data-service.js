@@ -1,9 +1,10 @@
 const axios = require('axios').default;
 const moment = require('moment-timezone');
+const { getNow } = require('./daytime-service');
 
 const saveUrl = async (url) => {
     try {
-        const data = { screenShotUrl: url };
+        const data = { screenShotUrl: url, modifiedDate: getNow() };
         const res = await axios.put('https://jsonblob.com/api/jsonBlob/cd5ac302-03a0-11eb-909d-374db14ec6e1', data, { headers: { 'Content-Type': 'application/json' } });
         return res.status;
     } catch (error) {
@@ -14,7 +15,7 @@ const saveUrl = async (url) => {
 const getUrl = async () => {
     try {
         const res = await axios.get('https://jsonblob.com/api/jsonBlob/cd5ac302-03a0-11eb-909d-374db14ec6e1');
-        return res.data.screenShotUrl;
+        return res.data;
     } catch (error) {
         console.log(error);
     }

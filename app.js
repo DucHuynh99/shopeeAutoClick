@@ -12,11 +12,12 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
+    const { screenShotUrl, modifiedDate } = await dataServices.getUrl();
     res
         .status(200)
         .render('home', {
-            title: 'Hoạt động gần đây',
-            screenshotUrl: await dataServices.getUrl()
+            title: modifiedDate,
+            screenshotUrl: screenShotUrl
         });
 });
 
