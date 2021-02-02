@@ -24,11 +24,12 @@ const moment = require('moment-timezone');
         case 0:
             console.log(`[${dateNow}] Săn xu mỗi ngày`);
             await page.goto(coinUrl);
-            await page.waitFor(180000);
-            if ((await page.$$('div.shopee-avatar')).length == 0) {
+            await page.waitForSelector('button._1Hh9_2', {visible: true});
+            if ((await page.$$('div.shopee-avatar')).length === 0) {
                 await reloginShopee(browser, page);
             }
-            await page.click('button._1Puh5H');
+            await page.waitForSelector('button._1Hh9_2');
+            await page.click('button._1Hh9_2');
             await page.waitFor(5000);
             const image1 = await page.screenshot({ fullPage: true });
             await saveScreenshot(image1);
@@ -36,7 +37,7 @@ const moment = require('moment-timezone');
         case 9: case 10: case 11: case 12: case 15: case 18: case 21:
             console.log(`[${dateNow}] Quà tặng Shopee`);
             await page.goto(luckyUrl, { waitUntil: 'networkidle0' });
-            if ((await page.$$('div.shopee-avatar')).length == 0) {
+            if ((await page.$$('div.shopee-avatar')).length === 0) {
                 await reloginShopee(browser, page);
             }
             await page.frames()[1].click('#clickArea');
