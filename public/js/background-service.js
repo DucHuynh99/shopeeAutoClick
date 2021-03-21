@@ -24,7 +24,7 @@ const moment = require('moment-timezone');
         case 0:
             console.log(`[${dateNow}] Săn xu mỗi ngày`);
             await page.goto(coinUrl);
-            await page.waitForSelector('button._1Hh9_2', {visible: true});
+            await page.waitForSelector('button._1Hh9_2', { visible: true });
             if ((await page.$$('div.shopee-avatar')).length === 0) {
                 await reloginShopee(browser, page);
             }
